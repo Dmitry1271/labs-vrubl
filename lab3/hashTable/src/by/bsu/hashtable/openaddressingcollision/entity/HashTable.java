@@ -8,7 +8,7 @@ import java.util.List;
  * Created by cplus on 22.10.2017.
  */
 public class HashTable {
-    private final static int SIZE = 100;
+    //private final static int SIZE = 100;
     private final static int HASH_DIGIT = 113;
     private int index;
     private List<Unit> hashTable;
@@ -37,9 +37,9 @@ public class HashTable {
     }
 
     public boolean add(long value) {
-        if (hashTable.size() >= SIZE) {
+        /*if (hashTable.size() >= SIZE) {
             return false;
-        }
+        }*/
         int key = (int) (value % HASH_DIGIT);
         if (contains(key)) {
             addKey(HASH_DIGIT + index++);

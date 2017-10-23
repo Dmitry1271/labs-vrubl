@@ -6,7 +6,7 @@ import java.util.*;
  * Created by cplus on 22.10.2017.
  */
 public class HashTable {
-    private final static int SIZE = 100;
+    //private final static int SIZE = 100;
     private final static int HASH_DIGIT = 113;
     private List<Unit> hashTable;
 
@@ -42,7 +42,7 @@ public class HashTable {
                 }
             }
             return true;
-        } else if (hashTable.size() < SIZE) {
+        } else if (hashTable.size() < HASH_DIGIT) {//
             addKey(key);
             hashTable.get(hashTable.size() - 1).getValues().add(value);
             return true;
