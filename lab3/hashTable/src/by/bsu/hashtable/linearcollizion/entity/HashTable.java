@@ -63,6 +63,15 @@ public class HashTable {
         }
     }
 
+    public Integer find(long value){
+        for(Unit elem: hashTable){
+            if (elem.getValues().contains(value)){
+                return elem.getKey();
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "HashTable{" +
