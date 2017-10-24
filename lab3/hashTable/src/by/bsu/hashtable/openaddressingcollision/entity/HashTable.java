@@ -1,82 +1,88 @@
 package by.bsu.hashtable.openaddressingcollision.entity;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 /**
  * Created by cplus on 22.10.2017.
  */
 public class HashTable {
-    //private final static int SIZE = 100;
     private final static int HASH_DIGIT = 113;
-    private int index;
-    private List<Unit> hashTable;
+    private final static int VALUE_FOR_RISING_SIZE = 300;
+    private int free;
+    private Unit[] hashTable;
+    private int currentSize;
 
     public HashTable() {
-        hashTable = new LinkedList<>();
+        hashTable = new Unit[HASH_DIGIT];
+        free = HASH_DIGIT;
+        currentSize = HASH_DIGIT;
     }
 
-    public List<Integer> keySet() {
-        if (hashTable == null) {
-            return null;
-        }
-        List<Integer> keys = new ArrayList<>();
-        for (Unit unit : hashTable) {
-            keys.add(unit.getKey());
-        }
-        return keys;
+    public void add(long value) {
+        addRecur(value, 0);
     }
 
-    public boolean contains(int key) {
-        return keySet() != null && keySet().contains(key);
-    }
 
-    private void addKey(int key) {
-        hashTable.add(new Unit(key));
-    }
-
-    public boolean add(long value) {
-        /*if (hashTable.size() >= SIZE) {
-            return false;
-        }*/
-        int key = (int) (value % HASH_DIGIT);
-        if (contains(key)) {
-            addKey(HASH_DIGIT + index++);
-            hashTable.get(hashTable.size() - 1).setValue(value);
-            return true;
-        } else {
-            addKey(key);
-            hashTable.get(hashTable.size() - 1).setValue(value);
-            return true;
-        }
-    }
-
-    public boolean remove(int key) {
-        if (!contains(key)) {
-            return false;
-        } else {
-            for (int i = 0; i < hashTable.size(); ++i) {
-                if (hashTable.get(i).getKey() == key) {
-                    hashTable.remove(i);
-                }
+    public boolean remove(long value) {
+        for (int i = 0; i < currentSize; ++i) {
+            if (hashTable[i] != null && hashTable[i].getValue() == value) {
+                hashTable[i] = null;
+                return true;
             }
-            return true;
         }
+        return false;
     }
 
-    public Integer findValue(long value){
-        for(Unit elem: hashTable){
-            if(elem.getValue() == value){
+    public Integer findValue(long value) {
+        for (Unit elem : hashTable) {
+            if (elem != null && elem.getValue() == value) {
                 return elem.getKey();
             }
         }
         return null;
     }
 
+    private void addRecur(long value, int index) {
+        int key = (int) (value % HASH_DIGIT) + index;
+
+        if (key == currentSize && isFull()) {
+            currentSize += VALUE_FOR_RISING_SIZE;
+            free += VALUE_FOR_RISING_SIZE;
+            hashTable = Arrays.copyOf(hashTable, currentSize);
+        } else if (key == currentSize) {
+            for (int i = 0; i < currentSize; ++i) {
+                if (hashTable[i] == null) {
+                    hashTable[i] = new Unit(i);
+                    hashTable[i].setValue(value);
+                    free--;
+                    return;
+                }
+            }
+        }
+
+        if (hashTable[key] == null) {
+            hashTable[key] = new Unit(key);
+            hashTable[key].setValue(value);
+            free--;
+        } else {
+            addRecur(value, ++index);
+        }
+    }
+
+    private boolean isFull() {
+        return free == 0;
+    }
+
     @Override
     public String toString() {
-        return "HashTable{" + hashTable +
-                '}';
+        StringBuilder string = new StringBuilder();
+        for (Unit elem : hashTable) {
+            if (elem != null) {
+                string.append(elem.getKey());
+                string.append(":").append(elem.getValue()).append("\n");
+            }
+        }
+        return string.toString();
     }
 }

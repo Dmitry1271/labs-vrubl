@@ -23,7 +23,12 @@ public class Unit {
         return values;
     }
 
+    public void setKey(int key) {
+        this.key = key;
+    }
+
     @Override
+
     public String toString() {
         return  "\n" + key + ":" + values;
     }
