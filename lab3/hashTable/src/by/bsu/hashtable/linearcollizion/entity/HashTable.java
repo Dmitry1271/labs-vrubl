@@ -25,7 +25,7 @@ public class HashTable {
     public boolean remove(long value) {
         Unit elem;
         for (int i = 0; i < hashTable.length; ++i) {
-            elem = hashTable[i];//так быстрее
+            elem = hashTable[i];
             if (elem != null && hashTable[i].getValues().contains(value)) {
                 elem.getValues().remove(elem.getValues().indexOf(value));
                 if (elem.getValues().isEmpty()) {

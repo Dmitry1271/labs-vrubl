@@ -1,6 +1,5 @@
 package by.bsu.hashtable.openaddressingcollision.entity;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -9,6 +8,7 @@ import java.util.Arrays;
 public class HashTable {
     private final static int HASH_DIGIT = 113;
     private final static int VALUE_FOR_RISING_SIZE = 300;
+    private final static double CHANGE_SIZE_NUMBER = 0.3;
     private int free;
     private Unit[] hashTable;
     private int currentSize;
@@ -20,7 +20,16 @@ public class HashTable {
     }
 
     public void add(long value) {
-        addRecur(value, 0);
+        boolean flag = false;
+        for (Unit elem : hashTable) {
+            if (elem != null && elem.getValue() == value) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            addRecur(value, 0);
+        }
     }
 
 
@@ -44,9 +53,9 @@ public class HashTable {
     }
 
     private void addRecur(long value, int index) {
-        int key = (int) (value % HASH_DIGIT) + index;
+        int key = hashFunction(value) + index;
 
-        if (key == currentSize && isFull()) {
+        if (key == currentSize && isNeedChangeSize()) {
             currentSize += VALUE_FOR_RISING_SIZE;
             free += VALUE_FOR_RISING_SIZE;
             hashTable = Arrays.copyOf(hashTable, currentSize);
@@ -70,8 +79,12 @@ public class HashTable {
         }
     }
 
-    private boolean isFull() {
-        return free == 0;
+    private boolean isNeedChangeSize() {
+        return free == currentSize * CHANGE_SIZE_NUMBER;
+    }
+
+    private int hashFunction(long value) {
+        return (int) (value % HASH_DIGIT);
     }
 
     @Override

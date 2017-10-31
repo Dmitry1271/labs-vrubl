@@ -22,15 +22,6 @@ public class RunnerOpenAddressingCollision {
         System.out.println(hashTable.toString());*/
 
         HashTable hashTable = new HashTable();
-        hashTable.add(3);
-        hashTable.add(3);
-        hashTable.add(4);
-        hashTable.add(6);
-        hashTable.add(8);
-        hashTable.remove(3);
-        hashTable.remove(3);
-        System.out.println(hashTable.toString());
-        System.out.println(hashTable.findValue(4));
         Scanner scanner = new Scanner(System.in);
         while (true) {
             hashTable.add(scanner.nextLong());
