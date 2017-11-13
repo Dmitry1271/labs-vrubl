@@ -1,11 +1,9 @@
-package by.bsu.widewidthSearch.entity;
+package by.bsu.algorithmdijkstra.entity;
 
-
-import java.awt.*;
 import java.util.Arrays;
 
 /**
- * Created by cplus on 02.11.2017.
+ * Created by cplus on 09.11.2017.
  */
 public class Graph {
     public final static double CENTER_X = 350;
@@ -29,14 +27,6 @@ public class Graph {
         this.points = points;
     }
 
-    public Point[] getPoints() {
-        return points;
-    }
-
-    public void setPoints(Point[] points) {
-        this.points = points;
-    }
-
     public int[][] getMatrix() {
         return matrix;
     }
@@ -45,11 +35,19 @@ public class Graph {
         this.matrix = matrix;
     }
 
+    public Point[] getPoints() {
+        return points;
+    }
+
+    public void setPoints(Point[] points) {
+        this.points = points;
+    }
+
     private void setPoints() {
         int size = matrix.length;
         double angle = 2 * Math.PI / size;
         for (int i = 0; i < size; ++i) {
-            points[i] = new Point((int) (CENTER_X + RADIUS * Math.cos(i * angle)), (int) (CENTER_Y + RADIUS * Math.sin(i * angle)));
+            points[i]= new Point((int)(CENTER_X + RADIUS * Math.cos(i * angle)),(int) (CENTER_Y + RADIUS * Math.sin(i * angle)));
         }
     }
 
@@ -60,18 +58,23 @@ public class Graph {
 
         Graph graph = (Graph) o;
 
-        return Arrays.deepEquals(matrix, graph.matrix);
+        if (!Arrays.deepEquals(matrix, graph.matrix)) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(points, graph.points);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.deepHashCode(matrix);
+        int result = Arrays.deepHashCode(matrix);
+        result = 31 * result + Arrays.hashCode(points);
+        return result;
     }
 
     @Override
     public String toString() {
         return "Graph{" +
                 "matrix=" + Arrays.toString(matrix) +
+                ", points=" + Arrays.toString(points) +
                 '}';
     }
 }

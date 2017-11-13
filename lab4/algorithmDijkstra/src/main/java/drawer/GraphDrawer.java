@@ -1,12 +1,13 @@
-package by.bsu.widewidthSearch.drawer;
+package drawer;
 
-import by.bsu.widewidthSearch.entity.Graph;
+import by.bsu.algorithmdijkstra.entity.Graph;
+import drawer.action.LineAngle;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by cplus on 02.11.2017.
+ * Created by cplus on 09.11.2017.
  */
 public class GraphDrawer extends JPanel {
     public static final int PANEL_WIDTH = 700;
@@ -36,5 +37,8 @@ public class GraphDrawer extends JPanel {
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         DrawHelper.drawGraph(graphics, graph);
+
+
+
     }
 }

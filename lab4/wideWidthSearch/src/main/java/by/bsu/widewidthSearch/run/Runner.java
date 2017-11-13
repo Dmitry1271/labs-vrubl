@@ -34,7 +34,7 @@ public class Runner {
                                       {0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
 
-        Graph graph = new Graph(matrix3);
+        Graph graph = new Graph(matrix2);
         GraphDrawer gw = new GraphDrawer(graph);
         gw.draw();
         WideWidthSearch wideWidthSearch = new WideWidthSearch(graph);
