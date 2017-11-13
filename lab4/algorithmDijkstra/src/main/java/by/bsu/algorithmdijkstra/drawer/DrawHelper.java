@@ -1,7 +1,7 @@
-package drawer;
+package by.bsu.algorithmdijkstra.drawer;
 
 import by.bsu.algorithmdijkstra.entity.Graph;
-import drawer.action.LineAngle;
+import by.bsu.algorithmdijkstra.drawer.action.LineAngle;
 
 import java.awt.*;
 

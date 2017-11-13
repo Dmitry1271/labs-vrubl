@@ -1,7 +1,7 @@
 package by.bsu.algorithmdijkstra.run;
 
 import by.bsu.algorithmdijkstra.entity.Graph;
-import drawer.GraphDrawer;
+import by.bsu.algorithmdijkstra.drawer.GraphDrawer;
 
 /**
  * Created by cplus on 09.11.2017.

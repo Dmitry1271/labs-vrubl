@@ -1,6 +1,5 @@
 package by.bsu.algorithmdijkstra.drawer.action;
 
-import drawer.action.LineAngle;
 import org.junit.Assert;
 import org.junit.Test;
 

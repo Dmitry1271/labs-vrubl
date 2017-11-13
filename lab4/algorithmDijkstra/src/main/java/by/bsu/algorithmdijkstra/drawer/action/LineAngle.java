@@ -1,4 +1,4 @@
-package drawer.action;
+package by.bsu.algorithmdijkstra.drawer.action;
 
 /**
  * Created by cplus on 10.11.2017.
