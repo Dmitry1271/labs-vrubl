@@ -47,7 +47,7 @@ public class Graph {
         int size = matrix.length;
         double angle = 2 * Math.PI / size;
         for (int i = 0; i < size; ++i) {
-            points[i]= new Point((int)(CENTER_X + RADIUS * Math.cos(i * angle)),(int) (CENTER_Y + RADIUS * Math.sin(i * angle)));
+            points[i] = new Point((int) (CENTER_X + RADIUS * Math.cos(i * angle)), (int) (CENTER_Y + RADIUS * Math.sin(i * angle)));
         }
     }
 

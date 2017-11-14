@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class RunnerOpenAddressingCollision {
     public static void main(String[] args) {
-        /*int size = 1002;
+        /*int size = 1000;
         long maxValue = 10000000000L;
         Generator generator = new Generator(size, maxValue);
         generator.generate();

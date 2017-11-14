@@ -1,5 +1,7 @@
 package by.bsu.algorithmdijkstra.drawer.action;
 
+import java.util.Map;
+
 /**
  * Created by cplus on 10.11.2017.
  */
@@ -11,7 +13,7 @@ public final class LineAngle {
         double xDif = x2 - x1;
         double yDif = y2 - y1;
 
-        if (xDif >= 0 && yDif >= 0) {//1 part
+        if (xDif > 0 && yDif >= 0) {//1 part
             return Math.atan((y2 - y1) / (x2 - x1));
         }
 
@@ -19,7 +21,7 @@ public final class LineAngle {
             return Math.PI + Math.atan((y2 - y1) / (x2 - x1));
         }
 
-        if (xDif <= 0 && yDif <= 0) {//3 part
+        if (xDif < 0 && yDif <= 0) {//3 part
             return Math.PI + Math.atan((y2 - y1) / (x2 - x1));
         }
 

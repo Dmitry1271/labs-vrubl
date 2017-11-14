@@ -1,13 +1,18 @@
 package by.bsu.eulercycle.drawer;
 
 import by.bsu.eulercycle.entity.Graph;
+import by.bsu.eulercycle.drawer.action.LineAngle;
 
 import java.awt.*;
+import java.util.Map;
 
 /**
- * Created by cplus on 02.11.2017.
+ * Created by cplus on 09.11.2017.
  */
-public final class DrawHelper {
+public class DrawHelper {
+    public static final int DIAM = 8;
+    public static final int TEXT_INDENT = 10;
+
     private DrawHelper() {
     }
 
@@ -17,12 +22,13 @@ public final class DrawHelper {
 
     }
 
+
     private static void drawPoints(Graphics graphics, Graph graph) {
         int size = graph.getMatrix().length;
         Point[] points = graph.getPoints();
         for (int i = 0; i < size; ++i) {
-            graphics.fillOval(points[i].x, points[i].y, 8, 8);
-            graphics.drawString("" + (i + 1), points[i].x + 10, points[i].y + 10);
+            graphics.fillOval(points[i].x, points[i].y, DIAM, DIAM);
+            graphics.drawString("" + (i + 1), points[i].x + TEXT_INDENT, points[i].y + TEXT_INDENT);
         }
     }
 
@@ -30,13 +36,14 @@ public final class DrawHelper {
         int size = graph.getMatrix().length;
         Point[] points = graph.getPoints();
         int[][] matrix = graph.getMatrix();
+
         for (int i = 1; i < size; ++i) {
             for (int j = 0; j < i; ++j) {
-                if (matrix[i][j] == 1) {
-                    graphics.drawLine(points[i].x + 4, points[i].y + 4, points[j].x + 4, points[j].y + 4);
+                if (matrix[i][j] > 0) {
+                    graphics.setColor(Color.black);
+                    graphics.drawLine(points[i].x + DIAM / 2, points[i].y + DIAM / 2, points[j].x + DIAM / 2, points[j].y + DIAM / 2);
                 }
             }
         }
     }
-
 }

@@ -1,12 +1,14 @@
 package by.bsu.eulercycle.drawer;
 
+import by.bsu.eulercycle.algorithm.EulerCycle;
 import by.bsu.eulercycle.entity.Graph;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
 /**
- * Created by cplus on 02.11.2017.
+ * Created by cplus on 09.11.2017.
  */
 public class GraphDrawer extends JPanel {
     public static final int PANEL_WIDTH = 700;

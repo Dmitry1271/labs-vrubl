@@ -55,7 +55,7 @@ public class HashTable {
     private void addRecur(long value, int index) {
         int key = hashFunction(value) + index;
 
-        if (key == currentSize && isNeedChangeSize()) {
+        if (isNeedChangeSize()) {
             currentSize += VALUE_FOR_RISING_SIZE;
             free += VALUE_FOR_RISING_SIZE;
             hashTable = Arrays.copyOf(hashTable, currentSize);
@@ -79,8 +79,12 @@ public class HashTable {
         }
     }
 
+    public int getCurrentSize() {
+        return currentSize;
+    }
+
     private boolean isNeedChangeSize() {
-        return free == currentSize * CHANGE_SIZE_NUMBER;
+        return free < currentSize * CHANGE_SIZE_NUMBER;
     }
 
     private int hashFunction(long value) {
