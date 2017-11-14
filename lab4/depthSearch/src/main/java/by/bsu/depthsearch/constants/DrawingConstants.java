@@ -14,12 +14,12 @@ public final class DrawingConstants {
     public static final int HEIGHT_ADD = 39;
     public static final int MARGIN_TOP = 0;
     public static final int MARGIN_LEFT = 300;
-    public static final int SLEEP = 0;
+    public static final int SLEEP = 200;
 
     /**
      * Cell constants
      */
-    public static final int CELL_SIZE = 2;
+    public static final int CELL_SIZE = 50;
 
     /**
      * Maze constants

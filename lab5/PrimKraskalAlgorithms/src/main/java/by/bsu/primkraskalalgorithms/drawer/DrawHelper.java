@@ -1,10 +1,10 @@
-package by.bsu.algorithmdijkstra.drawer;
+package by.bsu.primkraskalalgorithms.drawer;
 
-import by.bsu.algorithmdijkstra.entity.*;
-import by.bsu.algorithmdijkstra.drawer.action.LineAngle;
-import by.bsu.algorithmdijkstra.entity.Point;
+import by.bsu.primkraskalalgorithms.entity.*;
+import by.bsu.primkraskalalgorithms.entity.Point;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by cplus on 09.11.2017.
@@ -12,8 +12,6 @@ import java.awt.*;
 public class DrawHelper {
     public static final int DIAM = 8;
     public static final int TEXT_INDENT = 15;
-    public static final int ARROW_LINE_LENGTH = 30;
-    public static final double ARROW_ANGLE = Math.toRadians(15);
 
     private DrawHelper() {
     }
@@ -22,6 +20,14 @@ public class DrawHelper {
         drawPoints(graphics, graph);
         drawLines(graphics, graph);
 
+    }
+
+    public static void drawAlgorithmResult(Graphics graphics, List<Edge> edges, Graph graph) {
+        Point[] points = graph.getPoints();
+        graphics.setColor(new Color(30,230,0));
+        for (Edge edge : edges) {
+            graphics.drawLine(points[edge.getV1() - 1].x + DIAM / 2, points[edge.getV1() - 1].y + DIAM / 2, points[edge.getV2() - 1].x + DIAM / 2, points[edge.getV2() - 1].y + DIAM / 2);
+        }
     }
 
 
@@ -41,32 +47,18 @@ public class DrawHelper {
         int[][] matrix = graph.getMatrix();
         int vertex;
 
-        for (int i = 0; i < size; ++i) {
-            for (int j = 0; j < size; ++j) {
+        for (int i = 1; i < size; ++i) {
+            for (int j = 0; j < i; ++j) {
                 vertex = matrix[i][j];
-                if (vertex > 0 && vertex < Integer.MAX_VALUE) {
+                if (vertex > 0) {
                     graphics.setColor(Color.orange);
                     graphics.drawLine(points[i].x + DIAM / 2, points[i].y + DIAM / 2, points[j].x + DIAM / 2, points[j].y + DIAM / 2);
-                    drawArrowLines(points[i].x + DIAM / 2, points[i].y + DIAM / 2, points[j].x + DIAM / 2, points[j].y + DIAM / 2, graphics);
                     drawWeight(graphics, points[i], points[j], vertex);
                 }
             }
         }
     }
 
-    private static void drawArrowLines(double x1, double y1, double x2, double y2, Graphics graphics) {
-        double angle = LineAngle.getAngle(x2, y2, x1, y1);
-
-        double rotationLeftX = ARROW_LINE_LENGTH * Math.cos(angle - ARROW_ANGLE);
-        double rotationRightX = ARROW_LINE_LENGTH * Math.cos(angle + ARROW_ANGLE);
-        double rotationLeftY = ARROW_LINE_LENGTH * Math.sin(angle - ARROW_ANGLE);
-        double rotationRightY = ARROW_LINE_LENGTH * Math.sin(angle + ARROW_ANGLE);
-
-        graphics.setColor(Color.red);
-        graphics.drawLine((int) x2, (int) y2, (int) (x2 + rotationRightX), (int) (y2 + rotationRightY));
-        graphics.drawLine((int) x2, (int) y2, (int) (x2 + rotationLeftX), (int) (y2 + rotationLeftY));
-
-    }
 
     private static void drawWeight(Graphics graphics, Point v1, Point v2, int weight) {
         graphics.setColor(Color.blue);
