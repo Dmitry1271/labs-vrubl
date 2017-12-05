@@ -2,11 +2,8 @@ package by.bsu.kraskalalgorithm.algorithm;
 
 import by.bsu.kraskalalgorithm.entity.Edge;
 import by.bsu.kraskalalgorithm.entity.Graph;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Created by cplus on 14.11.2017.
@@ -33,7 +30,7 @@ public class KraskalAlgorithm {
     public void doAlgorithm() {
         Edge edge;
         //while (!isEnd()) {
-        edge = getMinAdjacentEdge();
+        edge = getMinEdge();
         changeRemark(remarks.get(edge.getV2()), remarks.get(edge.getV1()));
         result.add(edge);
         //}
@@ -57,7 +54,7 @@ public class KraskalAlgorithm {
         }
     }
 
-    private Edge getMinAdjacentEdge() {
+    private Edge getMinEdge() {
         int min = Integer.MAX_VALUE;
         Edge edge = new Edge();
 
@@ -75,10 +72,8 @@ public class KraskalAlgorithm {
     }
 
     private void changeRemark(int old, int recent) {
-        // System.out.println("fd");
         for (int i = 0; i < size; ++i) {
             if (remarks.get(i + 1) == old) {
-                //System.out.println("))))))))))))))))))))))))))))))))))))))))");
                 remarks.put(i + 1, recent);
             }
         }
