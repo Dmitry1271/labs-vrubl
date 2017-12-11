@@ -25,6 +25,11 @@ public class Point extends java.awt.Point {
         this(x, y);
     }
 
+    public Point(int i) {
+        status = Status.FREE;
+        this.i = i;
+    }
+
     public Point(int x, int y, int i) {
         this(x, y);
         this.i = i;

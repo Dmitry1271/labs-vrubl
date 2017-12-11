@@ -17,21 +17,14 @@ public class Graph {
     public Graph() {
     }
 
-    public Graph(int[][] matrix) {
-        this.matrix = matrix;
-        points = new Point[matrix.length];
-        setPoints();
-    }
-
     public Graph(int[][] matrix, Point[] points) {
         this.matrix = matrix;
         this.points = points;
     }
 
-    public Graph(int[][] matrix, int[][] wants) {
-        this.matrix = matrix;
+    public Graph(int[][] wants) {
         this.wants = wants;
-        points = new Point[matrix.length];
+        points = new Point[wants.length];
         setPoints();
         setPointsWants();
     }
@@ -61,10 +54,10 @@ public class Graph {
     }
 
     private void setPoints() {
-        int size = matrix.length;
+        int size = wants.length;
         double angle = 2 * Math.PI / size;
         for (int i = 0; i < size; ++i) {
-            points[i] = new Point((int) (CENTER_X + RADIUS * Math.cos(i * angle)), (int) (CENTER_Y + RADIUS * Math.sin(i * angle)), i + 1);
+            points[i] = new Point(i + 1);
         }
     }
 

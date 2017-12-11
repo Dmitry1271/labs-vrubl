@@ -59,6 +59,7 @@ public class StableMarriage {
         } else {
             int conflictMan = getConflictMen(manWant);
             int best = getBest(currentMan, mans[conflictMan - 1], women[manWant - 1]);
+
             if (!currentMan.equals(mans[best - 1])) {//currentLose
                 currentMan.setStatus(Status.FREE);
                 currentMan.getWants().removeFirst();
@@ -66,7 +67,9 @@ public class StableMarriage {
             } else {//conflictLose
                 mans[conflictMan - 1].getWants().removeFirst();
                 mans[conflictMan - 1].setStatus(Status.FREE);
+
                 int pairIndex = getPairByMan(conflictMan);
+
                 marriages.remove(pairIndex);
                 marriages.add(pairIndex, new Pair(currentMan.getI(), manWant));
                 mans[currentMan.getI() - 1].setStatus(Status.MAYBE);
